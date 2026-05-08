@@ -118,8 +118,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
     <label>상태</label>
     <select id="fStatus" style="width:100%;font-size:13px;padding:6px 8px;border-radius:6px;border:1px solid #ccc;">
       <option value="">없음</option>
+      <option>진행 전</option>
       <option>진행 중</option>
       <option>마무리</option>
+      <option>휴가</option>
     </select>
     <div class="modal-btns">
       <button onclick="closeModal()">취소</button>
@@ -417,8 +419,10 @@ function render(){
     <td style="width:62px;">
       <select id="iStatus" style="width:100%;font-size:12px;padding:3px 4px;border:1px solid #ddd;border-radius:4px;">
         <option value="">상태</option>
+        <option>진행 전</option>
         <option>진행 중</option>
         <option>마무리</option>
+        <option>휴가</option>
       </select>
     </td>
     <td style="width:26px;text-align:center;padding:2px;">

@@ -72,7 +72,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
       <span><span class="ld" style="background:#B4B2A9;"></span>공휴일</span>
       <span><span class="ld" style="background:#FAC775;border:1px solid #ddd;"></span>오늘</span>
       <span><span class="ld" style="background:#A32D2D;"></span>촬영</span>
-      <span><span class="ld" style="background:#00D4FF;border:1px solid #aaa;"></span>런칭/오픈예정/본펀딩</span>
+      <span><span class="ld" style="background:#F4C542;border:1px solid #aaa;"></span>편집</span>
       <span style="font-size:11px;color:#aaa;">주말 숨김 | 상세내용 클릭 시 수정 | 맨 아래 행에서 바로 입력 가능</span>
     </div>
     <div class="status" id="statusBar"></div>
@@ -185,7 +185,7 @@ const OWNER_PALETTE=[
 const OWNER_FIXED={
   '김수정':{bar:'#1D9E75',light:'#d6f3ea',text:'#085041'},
   '김건중':{bar:'#378ADD',light:'#deeef9',text:'#185FA5'},
-    '김수정, 김건중':{bar:'#E7B10A',light:'#FFF8DB',text:'#9A6B00'},
+  '김수정, 김건중':{bar:'#E7B10A',light:'#FFF8DB',text:'#9A6B00'},
 };
 // 상태별 색상
 const STATUS_COLORS={
@@ -211,7 +211,7 @@ function rebuildOwnerMap(list){
 function getKeywordColor(d){
   if(!d)return null;
   if(d.includes('촬영'))return{bar:'#A32D2D',light:'#fce8e8'};
-  if(d.includes('런칭')||d.includes('오픈예정')||d.includes('본펀딩'))return{bar:'#00D4FF',light:'#e0faff'};
+  if(d.includes('휴가')||d.includes('반차'))return{bar:'#00D4FF',light:'#e0faff'};
   return null;
 }
 const API_URL='https://script.google.com/macros/s/AKfycbxARyntY9cZh51YGKvYJXPSCGEuciT_qa884WNy97CnIUVQ7whsCCIPKuVsm6EzFIrFaA/exec';

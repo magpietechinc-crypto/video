@@ -343,12 +343,12 @@ function render(){
   for(let i=0;i<rows.length;i++){
     const t=rows[i];
     const kc=getKeywordColor(t.detail);
-    const barC=kc?{bar:kbarC.bar,light:kbarC.light}:getOwnerColor(t.owner);
+    const barC=kc?{bar:kc.bar,light:kc.light}:getOwnerColor(t.owner);
     const ownerC=getOwnerColor(t.owner);
     const sched=t.startUnknown
       ?`<span style="color:#E24B4A;font-size:10px;">미정</span>~${t.end?t.end.slice(5):''}`
       :t.start?`${t.start.slice(5)}${t.end&&t.end!==t.start?'~'+t.end.slice(5):''}` :'';
-    const badge=t.owner?`<span style="background:${ownerbarC.light};color:${ownerC.text};padding:1px 6px;border-radius:9px;font-size:11px;">${t.owner}</span>`:'';
+    const badge=t.owner?`<span style="background:${ownerC.light};color:${ownerC.text};padding:1px 6px;border-radius:9px;font-size:11px;">${t.owner}</span>`:'';
     fb+=`<tr>`;
     if(iSpan[i]!==undefined)fb+=`<td rowspan="${iSpan[i]}" style="width:68px;text-align:center;font-weight:500;background:#f4f3f0;">${t.item}</td>`;
     if(gSpan[i]!==undefined)fb+=`<td rowspan="${gSpan[i]}" style="width:88px;text-align:center;color:#666;background:#f4f3f0;">${t.group}</td>`;
@@ -356,7 +356,7 @@ function render(){
     fb+=`<td style="width:88px;font-size:11px;color:#888;">${sched}</td>`;
     fb+=`<td style="width:62px;">${badge}</td>`;
     const sc=STATUS_COLORS[t.status];
-    const statusBadge=t.status?`<span style="background:${sc?sbarC.light:'#f0f0ee'};color:${sc?sc.text:'#444'};padding:1px 6px;border-radius:9px;font-size:11px;white-space:nowrap;">${t.status}</span>`:'';
+    const statusBadge=t.status?`<span style="background:${sc?sc.light:'#f0f0ee'};color:${sc?sc.text:'#444'};padding:1px 6px;border-radius:9px;font-size:11px;white-space:nowrap;">${t.status}</span>`:'';
     fb+=`<td style="width:62px;">${statusBadge}</td>`;
     fb+=`<td style="width:26px;text-align:center;"><span class="del-btn" onclick="deleteItem(${t.id})">×</span></td>`;
     fb+=`</tr>`;
@@ -367,7 +367,7 @@ function render(){
       const sep=firstOfMonth?'border-left:2px solid #c0bfbb;':'';
       let cs='',inner='';
       if(t.startUnknown){
-        if(t.end&&w.ds===t.end){inner=`<div style="width:10px;height:10px;border-radius:50%;background:${barC.bar};margin:0 auto;"></div>`;cs=`background:${barC.light};`;}
+        if(t.end&&w.ds===t.end){inner=`<div style="width:10px;height:10px;border-radius:50%;background:${barC.bar};margin:0 auto;"></div>`;cs=`background:${c.bar};`;}
         else if(hol)cs='background:#D3D1C7;';
         else if(tod)cs='background:#FFF3CD;';
       }else{

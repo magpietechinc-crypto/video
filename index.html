@@ -211,7 +211,8 @@ function rebuildOwnerMap(list){
 function getKeywordColor(d){
   if(!d)return null;
   if(d.includes('촬영'))return{bar:'#A32D2D',light:'#fce8e8'};
-  if(d.includes('휴가')||d.includes('반차'))return{bar:'#00D4FF',light:'#e0faff'};
+  if(d.includes('편집'))return{bar:'#F4C542',light:'#ffebb5'};
+  if(d.includes('휴가')||d.includes('반차'))return{bar:'#00D4FF',light:'#e0faff'};  
   return null;
 }
 const API_URL='https://script.google.com/macros/s/AKfycbxARyntY9cZh51YGKvYJXPSCGEuciT_qa884WNy97CnIUVQ7whsCCIPKuVsm6EzFIrFaA/exec';

@@ -132,42 +132,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
 
 <script>
 const KR_HOLIDAYS=new Set([
-  // 2025
-  '2025-01-01', // 신정
-  '2025-01-28','2025-01-29','2025-01-30', // 설날연휴
-  '2025-03-01', // 삼일절
-  '2025-03-03', // 대체공휴일
-  '2025-05-01', // 노동절
-  '2025-05-05', // 어린이날
-  '2025-05-06', // 대체공휴일
-  '2025-05-15', // 부처님오신날
-  '2025-06-06', // 현충일
-  '2025-08-15', // 광복절
-  '2025-10-03', // 개천절
-  '2025-10-05','2025-10-06','2025-10-07', // 추석연휴
-  '2025-10-08', // 대체공휴일
-  '2025-10-09', // 한글날
-  '2025-12-25', // 크리스마스
-  // 2026
-  '2026-01-01', // 신정
-  '2026-02-14','2026-02-16','2026-02-17','2026-02-18','2026-02-19', // 설날연휴+대체
-  '2026-03-01', // 삼일절
-  '2026-03-02', // 대체공휴일
-  '2026-05-01', // 노동절
-  '2026-05-05', // 어린이날
-  '2026-05-24', // 부처님오신날
-  '2026-05-25', // 대체공휴일
-  '2026-06-03', // 지방선거 임시공휴일
-  '2026-06-06', // 현충일(토요일-대체없음)
-  '2026-07-17', // 제헌절(공휴일 부활)
-  '2026-08-15', // 광복절
-  '2026-08-17', // 대체공휴일
-  '2026-09-24','2026-09-25','2026-09-26', // 추석연휴
-  '2026-09-28', // 대체공휴일
-  '2026-10-03', // 개천절
-  '2026-10-05', // 대체공휴일
-  '2026-10-09', // 한글날
-  '2026-12-25', // 크리스마스
+  '2025-01-01','2025-01-28','2025-01-29','2025-01-30',
+  '2025-03-01','2025-03-03','2025-05-01','2025-05-05','2025-05-06','2025-05-15',
+  '2025-06-06','2025-08-15','2025-10-03','2025-10-05','2025-10-06',
+  '2025-10-07','2025-10-08','2025-10-09','2025-12-25',
+  '2026-01-01','2026-02-14','2026-02-16','2026-02-17','2026-02-18','2026-02-19',
+  '2026-03-01','2026-03-02','2026-05-01','2026-05-05','2026-05-24','2026-05-25',
+  '2026-06-03','2026-06-06','2026-07-17','2026-08-15','2026-08-17',
+  '2026-09-24','2026-09-25','2026-09-26','2026-09-28',
+  '2026-10-03','2026-10-05','2026-10-09','2026-12-25',
 ]);
 const OWNER_PALETTE=[
   {bar:'#378ADD',light:'#deeef9',text:'#185FA5'},{bar:'#D85A30',light:'#faeae4',text:'#712B13'},
@@ -181,20 +154,17 @@ const OWNER_PALETTE=[
   {bar:'#E91E8C',light:'#FCE4F3',text:'#880E4F'},{bar:'#F39C12',light:'#FEF9E7',text:'#7D6608'},
   {bar:'#1ABC9C',light:'#D1F2EB',text:'#0E6655'},{bar:'#6C3483',light:'#E8DAEF',text:'#4A235A'},
 ];
-// 담당자별 고정 색상 지정
 const OWNER_FIXED={
   '김수정':{bar:'#1D9E75',light:'#d6f3ea',text:'#085041'},
   '김건중':{bar:'#378ADD',light:'#deeef9',text:'#185FA5'},
   '김수정, 김건중':{bar:'#E7B10A',light:'#FFF8DB',text:'#9A6B00'},
 };
-// 상태별 색상
 const STATUS_COLORS={
   '진행 전':{bar:'#6B7280',light:'#F3F4F6',text:'#374151'},
   '진행 중':{bar:'#C0392B',light:'#fde8e8',text:'#7B241C'},
   '마무리':{bar:'#1D9E75',light:'#d6f3ea',text:'#085041'},
   '휴가':{bar:'#4DA8DA',light:'#EAF7FD',text:'#1B6CA8'},
 };
-
 function hashOwner(str){
   let hash=0;
   for(let i=0;i<str.length;i++) hash=(hash*31+str.charCodeAt(i))&0xffff;
@@ -205,14 +175,12 @@ function getOwnerColor(o){
   if(OWNER_FIXED[o])return OWNER_FIXED[o];
   return OWNER_PALETTE[hashOwner(o)];
 }
-function rebuildOwnerMap(list){
-  // 해시 방식이라 별도 맵 불필요 — 호환성 유지용
-}
+function rebuildOwnerMap(list){}
 function getKeywordColor(d){
   if(!d)return null;
   if(d.includes('촬영'))return{bar:'#A32D2D',light:'#fce8e8'};
   if(d.includes('편집'))return{bar:'#F4C542',light:'#ffebb5'};
-  if(d.includes('휴가')||d.includes('반차'))return{bar:'#00D4FF',light:'#e0faff'};  
+  if(d.includes('휴가')||d.includes('반차'))return{bar:'#00D4FF',light:'#e0faff'};
   return null;
 }
 const API_URL='https://script.google.com/macros/s/AKfycbxARyntY9cZh51YGKvYJXPSCGEuciT_qa884WNy97CnIUVQ7whsCCIPKuVsm6EzFIrFaA/exec';
@@ -231,41 +199,30 @@ function getYearWorkdays(y){
   }
   return r;
 }
-
 function jsonp(url){
   return new Promise((resolve,reject)=>{
     const cb='cb_'+Math.random().toString(36).slice(2);
     const script=document.createElement('script');
     script.src=url+'&callback='+cb;
-    window[cb]=function(data){
-      delete window[cb];
-      document.body.removeChild(script);
-      resolve(data);
-    };
+    window[cb]=function(data){delete window[cb];document.body.removeChild(script);resolve(data);};
     script.onerror=()=>reject(new Error('JSONP 실패'));
     document.body.appendChild(script);
     setTimeout(()=>reject(new Error('timeout')),10000);
   });
 }
-
 async function loadTasks(){
   setStatus('불러오는 중...');
   try{
     const data=await jsonp(API_URL+'?action=list');
     if(Array.isArray(data)){
       function cleanDate(v){
-      if(!v)return'';
-      const s=String(v);
-      // ISO 형식(2026-05-07T...) 또는 Date 객체 문자열 처리
-      if(s.includes('T'))return s.slice(0,10);
-      // 구글 시트 날짜 숫자(시리얼) 처리
-      if(/^\d+$/.test(s)){
-        const d=new Date((Number(s)-25569)*86400*1000);
-        return d.toISOString().slice(0,10);
+        if(!v)return'';
+        const s=String(v);
+        if(s.includes('T'))return s.slice(0,10);
+        if(/^\d+$/.test(s)){const d=new Date((Number(s)-25569)*86400*1000);return d.toISOString().slice(0,10);}
+        return s.slice(0,10)||'';
       }
-      return s.slice(0,10)||'';
-    }
-    tasks=data.map(t=>({...t,id:Number(t.id),startUnknown:t.startUnknown===true||t.startUnknown==='TRUE'||t.startUnknown==='true',start:cleanDate(t.start),end:cleanDate(t.end)}));
+      tasks=data.map(t=>({...t,id:Number(t.id),startUnknown:t.startUnknown===true||t.startUnknown==='TRUE'||t.startUnknown==='true',start:cleanDate(t.start),end:cleanDate(t.end)}));
       if(tasks.length>0)nextId=Math.max(...tasks.map(t=>Number(t.id)))+1;
     }
     rebuildOwnerMap(tasks);setStatus('');render();
@@ -273,27 +230,21 @@ async function loadTasks(){
 }
 async function saveTask(task){
   setStatus('저장 중...');
-  try{
-    await jsonp(API_URL+'?action=save&task='+encodeURIComponent(JSON.stringify(task)));
-    setStatus('저장됨 ✓');setTimeout(()=>setStatus(''),1500);
-  }catch(e){setStatus('저장 실패');console.error(e);}
+  try{await jsonp(API_URL+'?action=save&task='+encodeURIComponent(JSON.stringify(task)));setStatus('저장됨 ✓');setTimeout(()=>setStatus(''),1500);}
+  catch(e){setStatus('저장 실패');console.error(e);}
 }
 async function deleteTaskRemote(id){
   setStatus('삭제 중...');
-  try{
-    await jsonp(API_URL+'?action=delete&id='+id);
-    setStatus('삭제됨 ✓');setTimeout(()=>setStatus(''),1500);
-  }catch(e){setStatus('삭제 실패');console.error(e);}
+  try{await jsonp(API_URL+'?action=delete&id='+id);setStatus('삭제됨 ✓');setTimeout(()=>setStatus(''),1500);}
+  catch(e){setStatus('삭제 실패');console.error(e);}
 }
 function setStatus(m){document.getElementById('statusBar').textContent=m;}
-
 function updateOwnerFilter(){
   const sel=document.getElementById('filterOwner');const cur=sel.value;
   const owners=[...new Set(tasks.map(t=>t.owner).filter(Boolean))].sort();
   sel.innerHTML='<option value="">전체 담당자</option>'+owners.map(o=>`<option>${o}</option>`).join('');
   sel.value=cur;
 }
-
 function render(){
   updateOwnerFilter();
   document.getElementById('yearLabel').textContent=`${viewYear}년`;
@@ -301,8 +252,6 @@ function render(){
   const fo=document.getElementById('filterOwner').value;
   const rows=tasks.filter(t=>!fo||t.owner===fo);
   const MONTHS=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-
-  // 고정 헤더 (항목/그룹/상세/일정/담당자 — 2행 span)
   document.getElementById('fHead').innerHTML=`
     <tr>
       <th rowspan="2" style="width:68px">항목</th>
@@ -313,8 +262,6 @@ function render(){
       <th rowspan="2" style="width:62px">상태</th>
       <th rowspan="2" style="width:26px"></th>
     </tr><tr></tr>`;
-
-  // 스크롤 헤더 — 월 행 + 날짜 행
   let sh='<tr>';
   for(let m=0;m<12;m++){
     const cnt=wdays.filter(w=>w.m===m).length;
@@ -329,8 +276,6 @@ function render(){
   }
   sh+='</tr>';
   document.getElementById('sHead').innerHTML=sh;
-
-  // rowspan
   const iSpan={},gSpan={};
   for(let i=0;i<rows.length;i++){
     const t=rows[i];
@@ -338,7 +283,6 @@ function render(){
     const gk=t.item+'§'+t.group;
     if(i===0||(rows[i-1].item+'§'+rows[i-1].group)!==gk){let s=1;while(i+s<rows.length&&(rows[i+s].item+'§'+rows[i+s].group)===gk)s++;gSpan[i]=s;}
   }
-
   let fb='',sb='';
   for(let i=0;i<rows.length;i++){
     const t=rows[i];
@@ -349,14 +293,14 @@ function render(){
       ?`<span style="color:#E24B4A;font-size:10px;">미정</span>~${t.end?t.end.slice(5):''}`
       :t.start?`${t.start.slice(5)}${t.end&&t.end!==t.start?'~'+t.end.slice(5):''}` :'';
     const badge=t.owner?`<span style="background:${ownerC.light};color:${ownerC.text};padding:1px 6px;border-radius:9px;font-size:11px;">${t.owner}</span>`:'';
+    const sc=STATUS_COLORS[t.status];
+    const statusBadge=t.status?`<span style="background:${sc?sc.light:'#f0f0ee'};color:${sc?sc.text:'#444'};padding:1px 6px;border-radius:9px;font-size:11px;white-space:nowrap;">${t.status}</span>`:'';
     fb+=`<tr>`;
     if(iSpan[i]!==undefined)fb+=`<td rowspan="${iSpan[i]}" style="width:68px;text-align:center;font-weight:500;background:#f4f3f0;">${t.item}</td>`;
     if(gSpan[i]!==undefined)fb+=`<td rowspan="${gSpan[i]}" style="width:88px;text-align:center;color:#666;background:#f4f3f0;">${t.group}</td>`;
     fb+=`<td class="col-detail" style="width:140px;" onclick="editItem(${t.id})" title="클릭해서 수정">${t.detail}</td>`;
     fb+=`<td style="width:88px;font-size:11px;color:#888;">${sched}</td>`;
     fb+=`<td style="width:62px;">${badge}</td>`;
-    const sc=STATUS_COLORS[t.status];
-    const statusBadge=t.status?`<span style="background:${sc?sc.light:'#f0f0ee'};color:${sc?sc.text:'#444'};padding:1px 6px;border-radius:9px;font-size:11px;white-space:nowrap;">${t.status}</span>`:'';
     fb+=`<td style="width:62px;">${statusBadge}</td>`;
     fb+=`<td style="width:26px;text-align:center;"><span class="del-btn" onclick="deleteItem(${t.id})">×</span></td>`;
     fb+=`</tr>`;
@@ -367,7 +311,7 @@ function render(){
       const sep=firstOfMonth?'border-left:2px solid #c0bfbb;':'';
       let cs='',inner='';
       if(t.startUnknown){
-        if(t.end&&w.ds===t.end){inner=`<div style="width:10px;height:10px;border-radius:50%;background:${barC.bar};margin:0 auto;"></div>`;cs=`background:${c.bar};`;}
+        if(t.end&&w.ds===t.end){inner=`<div style="width:10px;height:10px;border-radius:50%;background:${barC.bar};margin:0 auto;"></div>`;cs=`background:${barC.light};`;}
         else if(hol)cs='background:#D3D1C7;';
         else if(tod)cs='background:#FFF3CD;';
       }else{
@@ -389,22 +333,14 @@ function render(){
   }
   document.getElementById('fBody').innerHTML=fb;
   document.getElementById('sBody').innerHTML=sb;
-
-  // 인라인 입력 행
   const today=new Date().toISOString().slice(0,10);
   const itemOpts=[...new Set(tasks.map(t=>t.item))].map(v=>`<option value="${v}">`).join('');
   const grpOpts=[...new Set(tasks.map(t=>t.group))].map(v=>`<option value="${v}">`).join('');
   const ownOpts=[...new Set(tasks.map(t=>t.owner).filter(Boolean))].map(v=>`<option value="${v}">`).join('');
   document.getElementById('fFoot').innerHTML=`
   <tr class="inline-row" id="inlineRow">
-    <td style="width:68px;">
-      <input id="iItem" placeholder="항목" list="iItemList" style="width:100%;"/>
-      <datalist id="iItemList">${itemOpts}</datalist>
-    </td>
-    <td style="width:88px;">
-      <input id="iGroup" placeholder="그룹" list="iGrpList" style="width:100%;"/>
-      <datalist id="iGrpList">${grpOpts}</datalist>
-    </td>
+    <td style="width:68px;"><input id="iItem" placeholder="항목" list="iItemList" style="width:100%;"/><datalist id="iItemList">${itemOpts}</datalist></td>
+    <td style="width:88px;"><input id="iGroup" placeholder="그룹" list="iGrpList" style="width:100%;"/><datalist id="iGrpList">${grpOpts}</datalist></td>
     <td style="width:140px;"><input id="iDetail" placeholder="상세내용" style="width:100%;"/></td>
     <td style="width:88px;">
       <div style="display:flex;align-items:center;gap:3px;margin-bottom:2px;">
@@ -414,10 +350,7 @@ function render(){
       </div>
       <input type="date" id="iEnd" value="${today}" style="width:100%;font-size:11px;"/>
     </td>
-    <td style="width:62px;">
-      <input id="iOwner" placeholder="담당자" list="iOwnList" style="width:100%;"/>
-      <datalist id="iOwnList">${ownOpts}</datalist>
-    </td>
+    <td style="width:62px;"><input id="iOwner" placeholder="담당자" list="iOwnList" style="width:100%;"/><datalist id="iOwnList">${ownOpts}</datalist></td>
     <td style="width:62px;">
       <select id="iStatus" style="width:100%;font-size:12px;padding:3px 4px;border:1px solid #ddd;border-radius:4px;">
         <option value="">상태</option>
@@ -427,42 +360,28 @@ function render(){
         <option>휴가</option>
       </select>
     </td>
-    <td style="width:26px;text-align:center;padding:2px;">
-      <button class="save-inline-btn" onclick="saveInline()" title="저장 (Enter)">✓</button>
-    </td>
+    <td style="width:26px;text-align:center;padding:2px;"><button class="save-inline-btn" onclick="saveInline()" title="저장 (Enter)">✓</button></td>
   </tr>`;
   document.getElementById('sFoot').innerHTML=`
-  <tr class="inline-row">
-    <td colspan="${wdays.length}" style="padding:5px 10px;color:#bbb;font-size:11px;">
-      ← 왼쪽에서 입력 후 ✓ 또는 Enter 키로 저장
-    </td>
-  </tr>`;
-
+  <tr class="inline-row"><td colspan="${wdays.length}" style="padding:5px 10px;color:#bbb;font-size:11px;">← 왼쪽에서 입력 후 ✓ 또는 Enter 키로 저장</td></tr>`;
   syncHeights();
-  // 오늘 날짜로 자동 스크롤
   requestAnimationFrame(()=>{
     const todayStr=new Date().toISOString().slice(0,10);
     const scroll=document.getElementById('ganttScroll');
     if(!scroll)return;
-    const wdays=getYearWorkdays(viewYear);
-    const idx=wdays.findIndex(w=>w.ds===todayStr);
+    const wd=getYearWorkdays(viewYear);
+    const idx=wd.findIndex(w=>w.ds===todayStr);
     if(idx<0)return;
-    const cellW=20;
-    scroll.scrollLeft=Math.max(0,idx*cellW-scroll.clientWidth/2+cellW/2);
+    scroll.scrollLeft=Math.max(0,idx*20-scroll.clientWidth/2+10);
   });
 }
-
 function syncHeights(){
   requestAnimationFrame(()=>{
-    // 헤더: 고정 2행 높이 = 스크롤 2행 합산
     const fhRows=document.getElementById('fHead').rows;
     const shRows=document.getElementById('sHead').rows;
     if(fhRows[0]&&shRows[0]&&shRows[1]){
-      const h0=shRows[0].offsetHeight||22;
-      const h1=shRows[1].offsetHeight||22;
-      fhRows[0].style.height=(h0+h1)+'px';
+      fhRows[0].style.height=(shRows[0].offsetHeight+shRows[1].offsetHeight)+'px';
     }
-    // 바디 행
     const fr=document.getElementById('fBody').rows;
     const sr=document.getElementById('sBody').rows;
     for(let i=0;i<fr.length;i++){
@@ -470,20 +389,17 @@ function syncHeights(){
       const h=Math.max(fr[i].offsetHeight,sr[i].offsetHeight,28);
       fr[i].style.height=h+'px';sr[i].style.height=h+'px';
     }
-    // 푸터 행
     const ff=document.getElementById('fFoot').rows[0];
     const sf=document.getElementById('sFoot').rows[0];
     if(ff&&sf){const h=Math.max(ff.offsetHeight,sf.offsetHeight,38);ff.style.height=h+'px';sf.style.height=h+'px';}
     document.getElementById('ganttOuter').style.height=document.getElementById('ft').offsetHeight+'px';
   });
 }
-
 function toggleInlineUnk(){
   const u=document.getElementById('iUnk').checked;
   const s=document.getElementById('iStart');
   s.disabled=u;s.style.opacity=u?'0.3':'1';
 }
-
 async function saveInline(){
   const item=document.getElementById('iItem').value.trim();
   const group=document.getElementById('iGroup').value.trim();
@@ -502,13 +418,10 @@ async function saveInline(){
   tasks.push(task);rebuildOwnerMap(tasks);render();
   await saveTask(task);
 }
-
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&e.target&&e.target.closest&&e.target.closest('#inlineRow')) saveInline();
 });
-
 function changeYear(d){viewYear+=d;render();}
-
 function toggleStartUnknown(){
   const u=document.getElementById('fStartUnknown').checked;
   document.getElementById('fStart').disabled=u;
@@ -519,7 +432,7 @@ function previewOwnerColor(){
   const p=document.getElementById('ownerPreview');
   if(!o){p.innerHTML='';return;}
   const c=getOwnerColor(o);
-  p.innerHTML=`<span style="width:14px;height:14px;border-radius:3px;background:${barC.bar};display:inline-block;"></span><span style="background:${barC.light};color:${c.text};padding:1px 8px;border-radius:10px;">${o}</span>`;
+  p.innerHTML=`<span style="width:14px;height:14px;border-radius:3px;background:${c.bar};display:inline-block;"></span><span style="background:${c.light};color:${c.text};padding:1px 8px;border-radius:10px;">${o}</span>`;
 }
 function openModal(id=null){
   editId=id;
@@ -547,7 +460,6 @@ function openModal(id=null){
 }
 function editItem(id){openModal(id);}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');editId=null;}
-
 async function saveItem(){
   const item=document.getElementById('fItem').value.trim();
   const group=document.getElementById('fGroup').value.trim();
@@ -574,9 +486,7 @@ async function deleteItem(id){
   await deleteTaskRemote(id);
 }
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
-
 setInterval(()=>loadTasks(),30000);
-
 loadTasks();
 </script>
 </body>
